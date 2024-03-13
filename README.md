@@ -45,28 +45,38 @@
 - ☑ Arquitetura Limpa
 
   Instalação
-Requisitos para rodar o projeto:
+Requisitos
+Antes de iniciar, certifique-se de ter os seguintes requisitos instalados:
 
-SDK .NET 7.0: A versão do .NET Framework necessária para executar a API.
-
+.NET SDK 7.0: A versão do .NET Framework necessária para executar a API.
 SQL Server: O banco de dados utilizado para armazenar os dados.
-
+Clone
 Clone o repositório do GitHub:
 
- git clone https://github.com/[seu-usuário]/BloodBankManager.API.git
+bash
+Copy code
+git clone https://github.com/[seu-usuário]/BloodBankManager.API.git
+Navegação
 Navege até a pasta do projeto:
 
-  cd BloodBankManager.API
-Abra o projeto na sua IDE de preferência (a IDE utilizada para desenvolvimento foi o Visual Studio)
+bash
+Copy code
+cd BloodBankManager.API
+IDE
+Abra o projeto na sua IDE de preferência (a IDE utilizada para desenvolvimento foi o Visual Studio).
 
-Restaure os pacotes:
+Restauração de Pacotes
+Restaure os pacotes necessários:
 
-  dotnet restore
-Configure o banco de dados:
-
+bash
+Copy code
+dotnet restore
+Configuração do Banco de Dados
 Abra o arquivo appsettings.json.
 Altere as configurações do banco de dados para corresponder ao seu ambiente.
-Execute a API:
+Execução da API
+Para executar a API, use o seguinte comando:
 
+bash
+Copy code
 dotnet run
-
