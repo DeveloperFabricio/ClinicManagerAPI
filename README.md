@@ -59,13 +59,46 @@ Antes de começar, verifique se você tem os seguintes requisitos instalados:
 Clone o repositório do GitHub:
 
 ```bash
-git clone https://github.com/[seu-usuário]/BloodBankManager.API.git
+git clone https://github.com/[seu-usuário]/ClinicManager.API.git
+```
 
-###Navegação
+### Navegue até a pasta do projeto:
 
-Navegue até a pasta do projeto:
+```bash
+cd ClinicManager.API
+```
 
-cd BloodBankManager.API
+### Abra o projeto na sua IDE de preferência (a IDE utilizada para desenvolvimento foi o Visual Studio)
+
+### Restaure os pacotes:
+
+```bash
+dotnet restore
+```
+
+### Configure o banco de dados:
+
+1. Abra o arquivo `appsettings.json`.
+2. Altere as configurações do banco de dados para corresponder ao seu ambiente.
+
+### Execute a API:
+
+Para executar a API, use o seguinte comando:
+
+```bash
+dotnet run
+```
+
+### Lembre-se de substituir [seu-usuário] pelo seu nome de usuário do GitHub.
+
+
+
+
+
+
+
+
+
 
 
 
