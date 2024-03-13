@@ -17,7 +17,7 @@
 - ⌛ PLUS 2: Background Service rodando e notificando no dia anterior.
 - ⌛ PLUS 2: Autenticação e Autorização Perfis: Médico, Administrador, Receptionista.
 - ☑ PLUS 2: CRUD DE ANEXO Tipos: Atestado, Receita, Evolução.
-- 
+  
 
 ### Tecnologias utilizadas 💡
 
@@ -25,7 +25,7 @@
 - ASP.NET Core 7: framework web para desenvolvimento de aplicações .NET
 - Entity Framework Core: persistência e consulta de dados.
 - SQL Server: banco de dados relacional.
-- 
+  
 
 ### Padrões, conceitos e arquitetura utilizada 📂
 
