@@ -44,8 +44,7 @@
 - ☑ Teste Unitários
 - ☑ Arquitetura Limpa
 
- # BloodBankManager.API
-
+ 
 ## Instalação
 
 ### Requisitos
@@ -61,3 +60,18 @@ Clone o repositório do GitHub:
 
 ```bash
 git clone https://github.com/[seu-usuário]/BloodBankManager.API.git
+
+###Navegação
+
+Navegue até a pasta do projeto:
+
+cd BloodBankManager.API
+
+
+
+
+
+
+
+
+
