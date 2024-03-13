@@ -7,6 +7,9 @@
 
 ### Funcionalidades 🖥️
 
+- ☑ (Concluído)
+- ⌛ (Fazendo)
+
 - ☑ CRUD Paciente Busca Por CPF (e celular)
 - ☑ CRUD Médico
 - ☑ CRUD Atendimento
