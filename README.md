@@ -5,10 +5,7 @@
 #### Anexos contendo: Atestado, Receita, Evolução do paciente.
 #### Paciente pode ser encontrado pelo CPF e Celular, e ainda recebe uma confirmação de agendamento por e-mail e Google Agenda.
 
-### Funcionalidades 🖥️
-
-- ☑ (Concluído)
-- ⌛ (Fazendo)
+### Funcionalidades 🖥️  ☑ (Concluído) ⌛ (Fazendo)
 
 - ☑ CRUD Paciente Busca Por CPF (e celular)
 - ☑ CRUD Médico
