@@ -1,11 +1,11 @@
-## Clinic Manager 
+## Clinic Manager API 🌐
 
 #### Este projeto é uma API web que implementa um sistema de gerenciamento de um clinica.
 #### A API permite que a clinica tenha controle total de: Médicos, Pacientes, Atendimento.
 #### Anexos contendo: Atestado, Receita, Evolução do paciente.
 #### Paciente pode ser encontrado pelo CPF e Celular, e ainda recebe uma confirmação de agendamento por e-mail e Google Agenda.
 
-### Funcionalidades 
+### Funcionalidades 🖥️
 
 - ☑ CRUD Paciente Busca Por CPF (e celular)
 - ☑ CRUD Médico
@@ -16,13 +16,13 @@
 - ⌛ PLUS 2: Autenticação e Autorização Perfis: Médico, Administrador, Receptionista.
 - ☑ PLUS 2: CRUD DE ANEXO Tipos: Atestado, Receita, Evolução.
 
-### Tecnologias utilizadas 
+### Tecnologias utilizadas 💡
 
-- ASP.NET Core 7
-- Entity Framework Core
-- SQL Server
+- ASP.NET Core 7: framework web para desenvolvimento de aplicações .NET
+- Entity Framework Core: persistência e consulta de dados.
+- SQL Server: banco de dados relacional.
 
-### Padrões, conceitos e arquitetura utilizada 
+### Padrões, conceitos e arquitetura utilizada 📂
 
 - ☑ Fluent Validation
 - ☑ Padrão Repository
