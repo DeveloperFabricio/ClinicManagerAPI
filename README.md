@@ -1,5 +1,7 @@
 ## Clinic Manager API 🌐
 
+## ⚙️ Status: Em Progresso...
+
 #### Este projeto é uma API web que implementa um sistema de gerenciamento de um clinica.
 #### A API permite que a clinica tenha controle total de: Médicos, Pacientes, Atendimento.
 #### Anexos contendo: Atestado, Receita, Evolução do paciente.
