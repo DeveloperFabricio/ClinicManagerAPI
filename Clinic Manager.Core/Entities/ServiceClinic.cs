@@ -1,0 +1,75 @@
+﻿using ClinicManagerAPI.Enums;
+using System.Net.Mail;
+using System.Net;
+using Twilio;
+using Twilio.Rest.Api.V2010.Account;
+
+namespace ClinicManagerAPI.Entities
+{
+    public class ServiceClinic
+    {
+        public int Id { get; set; }
+        public Patient IdPatient { get; set; }
+        public Service IdService { get; set; }
+        public Doctor IdDoctor { get; set; }
+        public string HealthInsurance { get; set; }
+        public DateTime Start { get; set; }
+        public DateTime End { get; set; }
+        public TypeServiceEnum TypeServices { get; set; }
+
+        public void SendConfirmationEmail(string email, string subject, string body)
+        {
+            var smtpClient = new SmtpClient("smtp.example.com")
+            {
+                Port = 587,
+                Credentials = new NetworkCredential("username", "password"),
+                EnableSsl = true,
+            };
+
+            var mailMessage = new MailMessage
+            {
+                From = new MailAddress("from@example.com"),
+                Subject = subject,
+                Body = body,
+                IsBodyHtml = true,
+            };
+
+            mailMessage.To.Add(email);
+
+            smtpClient.Send(mailMessage);
+        }
+
+        public void SendConfirmationSMS(string phoneNumber, string message)
+        {
+            // Configure sua conta Twilio
+            const string accountSid = "SUA_ACCOUNT_SID";
+            const string authToken = "SEU_AUTH_TOKEN";
+            TwilioClient.Init(accountSid, authToken);
+
+            // Envie a mensagem de texto
+            var twilioMessage = MessageResource.Create(
+                body: message,
+                from: new Twilio.Types.PhoneNumber("SEU_NUMERO_TWILIO"),
+                to: new Twilio.Types.PhoneNumber(phoneNumber)
+            );
+
+            Console.WriteLine(twilioMessage.Sid); // Opcional: imprime o SID da mensagem para fins de registro
+        }
+
+        public bool IsValid()
+        {
+
+            if (IdPatient == null || IdService == null || IdDoctor == null || string.IsNullOrEmpty(HealthInsurance))
+            {
+                return false;
+            }
+
+            if (Start >= End)
+            {
+                return false;
+            }
+
+            return true;
+        }
+    }
+}
