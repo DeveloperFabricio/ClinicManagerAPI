@@ -6,7 +6,7 @@
 #### Paciente pode ser encontrado pelo CPF e Celular, e ainda recebe uma confirmação de agendamento por e-mail e Google Agenda.
 
 
-### Funcionalidades 🖥️  ☑ (Concluído) ⌛ (Fazendo)
+### Funcionalidades 🖥️  ☑ (Concluído) ⌛ (Implementando)
 
 
 - ☑ CRUD Paciente Busca Por CPF (e celular)
@@ -90,6 +90,8 @@ dotnet run
 ```
 
 ### Lembre-se de substituir [seu-usuário] pelo seu nome de usuário do GitHub.
+
+Este projeto foi criado para fins didáticos e não abrange todas as regras e conceitos necessários de uma aplicação real em produção.*
 
 
 
