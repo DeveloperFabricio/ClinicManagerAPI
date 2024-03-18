@@ -41,19 +41,19 @@ namespace ClinicManagerAPI.Entities
 
         public void SendConfirmationSMS(string phoneNumber, string message)
         {
-            // Configure sua conta Twilio
+            
             const string accountSid = "SUA_ACCOUNT_SID";
             const string authToken = "SEU_AUTH_TOKEN";
             TwilioClient.Init(accountSid, authToken);
 
-            // Envie a mensagem de texto
+            
             var twilioMessage = MessageResource.Create(
                 body: message,
                 from: new Twilio.Types.PhoneNumber("SEU_NUMERO_TWILIO"),
                 to: new Twilio.Types.PhoneNumber(phoneNumber)
             );
 
-            Console.WriteLine(twilioMessage.Sid); // Opcional: imprime o SID da mensagem para fins de registro
+            Console.WriteLine(twilioMessage.Sid); 
         }
 
         public bool IsValid()
@@ -71,5 +71,7 @@ namespace ClinicManagerAPI.Entities
 
             return true;
         }
+
+        
     }
 }

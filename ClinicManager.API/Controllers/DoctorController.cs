@@ -1,5 +1,8 @@
-﻿using ClinicManagerAPI.Entities;
+﻿using ClinicManager.Application.Commands.CreateDoctorCommand;
+using ClinicManager.Application.Queries.GetIdServiceClinic;
+using ClinicManagerAPI.Entities;
 using ClinicManagerAPI.Repositories.Interface;
+using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -13,10 +16,12 @@ namespace ClinicManagerAPI.Controllers
     public class DoctorController : ControllerBase
     {
         private readonly IDoctorRepository _doctorRepository;
+        private readonly IMediator _mediator;
 
-        public DoctorController(IDoctorRepository doctorRepository)
+        public DoctorController(IDoctorRepository doctorRepository, IMediator mediator)
         {
             _doctorRepository = doctorRepository;
+            _mediator = mediator;
         }
 
         [HttpGet]
@@ -34,12 +39,14 @@ namespace ClinicManagerAPI.Controllers
         }
 
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetDoctorByIdAsync(int id)
+        public async Task<IActionResult> GetDoctorByIdQuery(int id)
         {
+            var query = new GetServiceClinicByIdQuery(id);
+
             try
             {
-                var doctor = await _doctorRepository.GetDoctorByIdAsync(id);
-                if(doctor == null)
+                var doctor = await _mediator.Send(query);
+                if (doctor == null)
                 {
                     return NotFound();
                 }
@@ -53,17 +60,17 @@ namespace ClinicManagerAPI.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> AddDoctorAsync(Doctor doctor)
+        public async Task<IActionResult> AddDoctorCommand(CreateDoctorCommand command)
         {
             try
             {
-                if(doctor == null)
+                if(command == null)
                 {
                     return BadRequest("Os dados fornecidos estão vazios!");
                 }
 
-                await _doctorRepository.AddDoctorAsync(doctor);
-                return Ok(doctor);
+                var id = await _mediator.Send(command);
+                return CreatedAtAction(nameof(GetDoctorByIdQuery), new { id = id },command);
             }
 
             catch (Exception)

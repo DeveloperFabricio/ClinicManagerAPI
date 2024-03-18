@@ -22,4 +22,9 @@
     <PackageReference Include="RabbitMQ.Client" Version="6.8.1" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Clinic Manager.Core\ClinicManager.Core.csproj" />
+    <ProjectReference Include="..\ClinicManager.Infrastructure\ClinicManager.Infrastructure.csproj" />
+  </ItemGroup>
+
 </Project>

@@ -1,6 +1,10 @@
-﻿using ClinicManagerAPI.Entities;
+﻿using ClinicManager.Application.Commands.CreatePatientCommand;
+using ClinicManager.Application.Queries.GetIdDoctor;
+using ClinicManager.Application.Queries.GetIdPatient;
+using ClinicManagerAPI.Entities;
 using ClinicManagerAPI.Repositories;
 using ClinicManagerAPI.Repositories.Interface;
+using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -13,10 +17,12 @@ namespace ClinicManagerAPI.Controllers
     public class PatientController : ControllerBase
     {
         private readonly IPatientRepository _patientRepository;
+        private readonly IMediator _mediator;
 
-        public PatientController(IPatientRepository patientRepository)
+        public PatientController(IPatientRepository patientRepository, IMediator mediator)
         {
             _patientRepository = patientRepository;
+            _mediator = mediator;
         }
 
 
@@ -35,11 +41,12 @@ namespace ClinicManagerAPI.Controllers
         }
 
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetPatientByIdAsync(int id)
+        public async Task<IActionResult> GetPatientByIdQuery(int id)
         {
+            var query = new GetPatientByIdQuery(id);
             try
             {
-                var patient = await _patientRepository.GetPatientByIdAsync(id);
+                var patient = await _mediator.Send(query);
                 if (patient == null)
                 {
                     return NotFound();
@@ -90,17 +97,17 @@ namespace ClinicManagerAPI.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> AddPatientAsync(Patient patient)
+        public async Task<IActionResult> AddPatientCommand(CreatePatientCommand command)
         {
             try
             {
-                if(patient == null)
+                if(command == null)
                 {
                     return BadRequest("O paciente enviado está vazio!");
                 }
 
-                await _patientRepository.AddPatientAsync(patient);
-                return Ok(patient);
+                var id = await _mediator.Send(command);
+                return CreatedAtAction(nameof(GetPatientByIdQuery), new { id = id }, command);
             }
             catch (Exception)
             {

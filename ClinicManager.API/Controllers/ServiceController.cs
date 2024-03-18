@@ -1,5 +1,9 @@
-﻿using ClinicManagerAPI.Entities;
+﻿using ClinicManager.Application.Commands.CreateServiceCommand;
+using ClinicManager.Application.Queries.GetIdPatient;
+using ClinicManager.Application.Queries.GetIdService;
+using ClinicManagerAPI.Entities;
 using ClinicManagerAPI.Repositories.Interface;
+using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -11,10 +15,12 @@ namespace ClinicManagerAPI.Controllers
     public class ServiceController : ControllerBase
     {
         private readonly IServiceRepository _serviceRepository;
+        private readonly IMediator _mediator;
 
-        public ServiceController(IServiceRepository serviceRepository)
+        public ServiceController(IServiceRepository serviceRepository, IMediator mediator)
         {
             _serviceRepository = serviceRepository;
+            _mediator = mediator;
         }
 
         [HttpGet]
@@ -32,11 +38,12 @@ namespace ClinicManagerAPI.Controllers
         }
 
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetServiceByIdAsync(int id)
+        public async Task<IActionResult> GetServiceByIdQuery(int id)
         {
+            var query = new GetServiceByIdQuery(id);
             try
             {
-                var service = await _serviceRepository.GetServiceByIdAsync(id);
+                var service = await _mediator.Send(query);
                 if(service == null)
                 {
                     return NotFound();
@@ -50,17 +57,17 @@ namespace ClinicManagerAPI.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> AddServiceAsync(Service service)
+        public async Task<IActionResult> AddServiceCommand(CreateServiceCommand command)
         {
             try
             {
-                if(service == null)
+                if(command == null)
                 {
                     return BadRequest("O serviço enviado está vazio");
                 }
 
-                await _serviceRepository.AddServiceAsync(service);
-                return Ok(service);
+                var id = await _mediator.Send(command);
+                return CreatedAtAction(nameof(GetServiceByIdQuery), new { id = id }, command);
             }
             catch (Exception)
             {

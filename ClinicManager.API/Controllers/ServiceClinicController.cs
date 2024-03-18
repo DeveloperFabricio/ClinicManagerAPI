@@ -1,5 +1,9 @@
-﻿using ClinicManagerAPI.Entities;
+﻿using ClinicManager.Application.Commands.CreateServiceClinicCommand;
+using ClinicManager.Application.Queries.GetIdPatient;
+using ClinicManager.Application.Queries.GetIdService;
+using ClinicManagerAPI.Entities;
 using ClinicManagerAPI.Repositories.Interface;
+using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -11,14 +15,13 @@ namespace ClinicManagerAPI.Controllers
     public class ServiceClinicController : ControllerBase
     {
         private readonly IServiceClinicRepository _serviceClinicRepository;
-        
+        private readonly IMediator _mediator;
 
-
-        public ServiceClinicController(IServiceClinicRepository serviceClinicRepository)
+        public ServiceClinicController(IServiceClinicRepository serviceClinicRepository, IMediator mediator)
 
         {
             _serviceClinicRepository = serviceClinicRepository;
-
+            _mediator = mediator;
         }
 
         [HttpGet]
@@ -36,11 +39,12 @@ namespace ClinicManagerAPI.Controllers
         }
 
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetServiceClinicByIdAsync(int id)
+        public async Task<IActionResult> GetServiceClinicByIdQuery(int id)
         {
+            var query = new GetServiceByIdQuery(id);
             try
             {
-                var serviceClinic = await _serviceClinicRepository.GetServiceClinicByIdAsync(id);
+                var serviceClinic = await _mediator.Send(query);
                 if (serviceClinic == null)
                 {
                     return NotFound();
@@ -55,17 +59,17 @@ namespace ClinicManagerAPI.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> AddServiceClinicAsync(ServiceClinic serviceClinic)
+        public async Task<IActionResult> AddServiceClinicCommand(CreateServiceClinicCommand command)
         {
             try
             {
-                    if (serviceClinic == null)
+                    if (command == null)
                     {
                         return BadRequest("O serviço clinico está vazio!");
                     }
 
-                    await _serviceClinicRepository.AddServiceClinicAsync(serviceClinic);
-                    return Ok(serviceClinic);
+                var id = await _mediator.Send(command);
+                return CreatedAtAction(nameof(GetServiceClinicByIdQuery), new { id = id }, command);
             }
                 catch (Exception)
                 {
