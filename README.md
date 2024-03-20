@@ -41,7 +41,7 @@
 - ☑ Sql Server 
 - ☑ Unit Of Work
 - ⌛ HostedService
-- ⌛ Domain Event
+- ☑ Domain Event
 - ☑ CQRS
 - ☑ Teste Unitários
 - ☑ Arquitetura Limpa
