@@ -1,17 +1,16 @@
 ﻿using ClinicManagerAPI.Entities;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Xunit;
 
-namespace ClinicManager.UnitTests.CoreEntities
+namespace ClinicManager.UnitTest.CoreEntities
 {
     public class PatientTests
     {
         [Fact]
+
         public void TestIfProjectStartWorks()
         {
             var patient = new Patient
@@ -30,8 +29,7 @@ namespace ClinicManager.UnitTests.CoreEntities
 
             var result = patient.IsValid();
 
-            Assert.IsTrue(result);
+            Assert.True(result);
         }
-        
     }
 }

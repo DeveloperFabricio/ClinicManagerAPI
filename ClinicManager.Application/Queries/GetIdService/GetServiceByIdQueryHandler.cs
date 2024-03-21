@@ -1,5 +1,6 @@
 ﻿using ClinicManager.Infrastructure.Persistence.Repositories;
 using ClinicManagerAPI.Entities;
+using ClinicManagerAPI.Repositories.Interface;
 using MediatR;
 using System;
 using System.Collections.Generic;
@@ -11,9 +12,9 @@ namespace ClinicManager.Application.Queries.GetIdService
 {
     public class GetServiceByIdQueryHandler : IRequestHandler<GetServiceByIdQuery, Service>
     {
-        private readonly ServiceRepository _serviceRepository;
+        private readonly IServiceRepository _serviceRepository;
 
-        public GetServiceByIdQueryHandler(ServiceRepository serviceRepository)
+        public GetServiceByIdQueryHandler(IServiceRepository serviceRepository)
         {
             _serviceRepository = serviceRepository;
         }

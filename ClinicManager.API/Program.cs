@@ -8,14 +8,29 @@ using ClinicManager.Infrastructure.Persistence;
 using ClinicManagerAPI.Repositories.Interface;
 using ClinicManager.Infrastructure.Persistence.Repositories;
 using ClinicManagerAPI.Entities;
+using Microsoft.Extensions.Options;
+using Twilio.TwiML.Voice;
+using MediatR;
+using ClinicManager.Application.Commands.CreateDoctorCommand;
+using ClinicManager.Application.Commands.CreatePatientCommand;
+using ClinicManager.Application.Commands.CreateServiceClinicCommand;
+using ClinicManager.Application.Commands.CreateServiceCommand;
+using ClinicManager.Application.Queries.GetIdDoctor;
+using ClinicManager.Application.Queries.GetIdPatient;
+using ClinicManager.Application.Queries.GetIdServiceClinic;
+using ClinicManager.Application.Queries.GetIdService;
+using FluentValidation;
+using ClinicManagerAPI.Validators;
+using ClinicManagerAPI.DTO_s;
+using FluentValidation.AspNetCore;
+using Microsoft.Extensions.DependencyInjection;
+using System.Web.WebPages;
 
 var builder = WebApplication.CreateBuilder(args);
 
 string chaveSecreta = "6baf3137-314c-4af5-90cf-24b86066eb65";
 
-// Add services to the container.
-
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(x =>
 {
@@ -67,11 +82,30 @@ builder.Services.AddAuthentication(options =>
 builder.Services.AddDbContext<AppDbContext>(options =>
 options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
+builder.Services.AddMediatR(op => op.RegisterServicesFromAssemblyContaining(typeof(CreateDoctorCommand)));
+builder.Services.AddMediatR(op => op.RegisterServicesFromAssemblyContaining(typeof(CreatePatientCommand)));
+builder.Services.AddMediatR(op => op.RegisterServicesFromAssemblyContaining(typeof(CreateServiceClinicCommand)));
+builder.Services.AddMediatR(op => op.RegisterServicesFromAssemblyContaining(typeof(CreateServiceCommand)));
+
+
+builder.Services.AddValidatorsFromAssemblyContaining<AttachmentCreateDTOValidator>().AddFluentValidationAutoValidation();
+builder.Services.AddTransient<IValidator<AttachmentCreateDTO>, AttachmentCreateDTOValidator>();
+
+
+builder.Services.AddTransient<IRequestHandler<GetDoctorByIdQuery, Doctor>, GetDoctorByIdQueryHandler>();
+builder.Services.AddTransient<IRequestHandler<GetPatientByIdQuery, Patient>, GetPatientByIdQueryHandler>();
+builder.Services.AddTransient<IRequestHandler<GetServiceByIdQuery, Service>, GetServiceByIdQueryHandler>();
+builder.Services.AddTransient<IRequestHandler<GetServiceClinicByIdQuery, ServiceClinic>, GetServiceClinicByIdQueryHandler>();
+
+
 builder.Services.AddScoped<IDoctorRepository, DoctorRepository>();
 builder.Services.AddScoped<IPatientRepository, PatientRepository>();
 builder.Services.AddScoped<IServiceClinicRepository, ServiceClinicRepository>();
 builder.Services.AddScoped<IServiceRepository, ServiceRepository>();
 builder.Services.AddScoped<IAttachmentRepository, AttachmentRepository>();
+builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
+
+builder.Services.AddLogging();
 
 var app = builder.Build();
 

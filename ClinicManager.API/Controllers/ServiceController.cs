@@ -16,11 +16,13 @@ namespace ClinicManagerAPI.Controllers
     {
         private readonly IServiceRepository _serviceRepository;
         private readonly IMediator _mediator;
+        private readonly ILogger<CreateServiceCommandHandler> _logger;
 
-        public ServiceController(IServiceRepository serviceRepository, IMediator mediator)
+        public ServiceController(IServiceRepository serviceRepository, IMediator mediator, ILogger<CreateServiceCommandHandler> logger)
         {
             _serviceRepository = serviceRepository;
             _mediator = mediator;
+            _logger = logger;
         }
 
         [HttpGet]
@@ -61,7 +63,7 @@ namespace ClinicManagerAPI.Controllers
         {
             try
             {
-                if(command == null)
+                if (command == null)
                 {
                     return BadRequest("O serviço enviado está vazio");
                 }
@@ -69,9 +71,10 @@ namespace ClinicManagerAPI.Controllers
                 var id = await _mediator.Send(command);
                 return CreatedAtAction(nameof(GetServiceByIdQuery), new { id = id }, command);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                return StatusCode(500, $"Erro ao criar o serviço!");
+                _logger.LogError(ex, "Erro ao criar o serviço: {Message}", ex.Message);
+                return StatusCode(500, $"Erro ao criar o serviço: {ex.Message}");
             }
         }
 

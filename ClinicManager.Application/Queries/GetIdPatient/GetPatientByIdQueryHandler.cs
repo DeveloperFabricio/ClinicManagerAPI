@@ -1,5 +1,6 @@
 ﻿using ClinicManager.Infrastructure.Persistence.Repositories;
 using ClinicManagerAPI.Entities;
+using ClinicManagerAPI.Repositories.Interface;
 using MediatR;
 using Microsoft.IdentityModel.Tokens;
 using System;
@@ -12,9 +13,9 @@ namespace ClinicManager.Application.Queries.GetIdPatient
 {
     public class GetPatientByIdQueryHandler : IRequestHandler<GetPatientByIdQuery, Patient>
     {
-        private readonly PatientRepository _patientRepository;
+        private readonly IPatientRepository _patientRepository;
 
-        public GetPatientByIdQueryHandler(PatientRepository patientRepository)
+        public GetPatientByIdQueryHandler(IPatientRepository patientRepository)
         {
             _patientRepository = patientRepository;
         }

@@ -2,23 +2,24 @@
 using ClinicManager.Infrastructure.Persistence;
 using ClinicManager.Infrastructure.Persistence.Repositories;
 using ClinicManagerAPI.Entities;
+using ClinicManagerAPI.Repositories.Interface;
 using MediatR;
 
 namespace ClinicManager.Application.Commands.CreateServiceClinicCommand
 {
     public class CreateServiceClinicCommandHandler : IRequestHandler<CreateServiceClinicCommand, Unit>
     {
-        private readonly ServiceClinicRepository _repository;
+        private readonly IServiceClinicRepository _repository;
         private readonly IUnitOfWork _unitOfWork;
-        private readonly PatientRepository _patientRepository;
-        private readonly ServiceRepository _serviceRepository;
-        private readonly DoctorRepository _doctorRepository;
+        private readonly IPatientRepository _patientRepository;
+        private readonly IServiceRepository _serviceRepository;
+        private readonly IDoctorRepository _doctorRepository;
 
-        public CreateServiceClinicCommandHandler(ServiceClinicRepository repository, 
+        public CreateServiceClinicCommandHandler(IServiceClinicRepository repository, 
             IUnitOfWork unitOfWork,
-            PatientRepository patientRepository,
-            ServiceRepository serviceRepository,
-            DoctorRepository doctorRepository)
+            IPatientRepository patientRepository,
+            IServiceRepository serviceRepository,
+            IDoctorRepository doctorRepository)
         {
             _repository = repository;
             _unitOfWork = unitOfWork;

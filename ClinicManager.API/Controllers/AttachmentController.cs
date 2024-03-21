@@ -16,16 +16,18 @@ namespace ClinicManagerAPI.Controllers
     [ApiController]
     public class AttachmentController : ControllerBase
     {
+        private readonly IValidator<AttachmentCreateDTO> _attachmentValidator;
         private readonly IAttachmentRepository _attachmentRepository;
         private readonly AppDbContext _appDbContext;
        
 
         public AttachmentController(IAttachmentRepository attachmentRepository, 
             AppDbContext appDbContext,
-            IValidator<AttachmentCreateDTOValidator> validatorRules)
+            IValidator<AttachmentCreateDTO> validator)
         {
             _attachmentRepository = attachmentRepository;
             _appDbContext = appDbContext;
+            _attachmentValidator = validator;
             
         }
 
@@ -64,17 +66,38 @@ namespace ClinicManagerAPI.Controllers
         [HttpPost]
         public async Task<ActionResult<Attachment>> AddAttachmentAsync([FromBody] AttachmentCreateDTO attachmentCreateDTO)
         {
-            var attachment = new Attachment
+            if (attachmentCreateDTO == null)
             {
-                Type = attachmentCreateDTO.Type,
-                FileName = attachmentCreateDTO.FileName,
-                FileData = attachmentCreateDTO.FileData
-            };
+                return BadRequest("O DTO de criação de anexo não pode ser nulo.");
+            }
 
-            _appDbContext.Attachments.Add(attachment);
-            await _appDbContext.SaveChangesAsync();
+            
+            var validationResult = await _attachmentValidator.ValidateAsync(attachmentCreateDTO);
+            if (!validationResult.IsValid)
+            {
+               
+                return BadRequest(validationResult.Errors);
+            }
 
-            return attachment;
+            try
+            {
+                var attachment = new Attachment
+                {
+                    Type = attachmentCreateDTO.Type,
+                    FileName = attachmentCreateDTO.FileName,
+                    FileData = attachmentCreateDTO.FileData
+                };
+
+                _appDbContext.Attachments.Add(attachment);
+                await _appDbContext.SaveChangesAsync();
+
+                return CreatedAtAction(nameof(GetAttachmentByIdAsync), new { id = attachment.Id }, attachment);
+            }
+            catch (Exception ex)
+            {
+                
+                return StatusCode(500, $"Erro interno ao adicionar anexo: {ex.Message}");
+            }
         }
 
         [HttpPut("{id}")]

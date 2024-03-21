@@ -39,6 +39,8 @@ namespace ClinicManager.Infrastructure.Persistence
             base.OnModelCreating(modelBuilder);
             modelBuilder.ApplyConfiguration(new ServiceClinicConfiguration());
 
+            modelBuilder.Entity<LoginSystem>().HasNoKey();
+
         }
 
     }
