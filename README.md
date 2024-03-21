@@ -17,7 +17,7 @@
 - ☑ CRUD Serviço
 - ⌛ PLUS 2: Confirmação de Agendamento (Email/SMS + Google Agenda).
 - ⌛ PLUS 2: Background Service rodando e notificando no dia anterior.
-- ⌛ PLUS 2: Autenticação e Autorização Perfis: Médico, Administrador, Receptionista.
+- ☑ PLUS 2: Autenticação e Autorização Perfis: Médico, Administrador, Receptionista.
 - ☑ PLUS 2: CRUD DE ANEXO Tipos: Atestado, Receita, Evolução.
   
 
@@ -35,14 +35,14 @@
 - ☑ Fluent Validation
 - ☑ Padrão Repository
 - ☑ Middleware (Lidar com exceções)
-- ⌛ InputModel, ViewModel
+- ☑ InputModel, ViewModel
 - ☑ DTO’s 
 - ☑ IEntityTipeConfiguration 
 - ☑ Sql Server 
-- ⌛ Unit Of Work
+- ☑ Unit Of Work
 - ⌛ HostedService
-- ⌛ Domain Event
-- ⌛ CQRS
+- ☑ Domain Event
+- ☑ CQRS
 - ☑ Teste Unitários
 - ☑ Arquitetura Limpa
 
