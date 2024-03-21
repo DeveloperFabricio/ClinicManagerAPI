@@ -15,7 +15,6 @@ string chaveSecreta = "6baf3137-314c-4af5-90cf-24b86066eb65";
 
 // Add services to the container.
 
-builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(x =>
