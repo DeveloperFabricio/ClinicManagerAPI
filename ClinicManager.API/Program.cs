@@ -25,7 +25,6 @@ using ClinicManagerAPI.DTO_s;
 using FluentValidation.AspNetCore;
 using Microsoft.Extensions.DependencyInjection;
 using System.Web.WebPages;
-using ClinicManager.Application.Email;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -105,7 +104,6 @@ builder.Services.AddScoped<IServiceClinicRepository, ServiceClinicRepository>();
 builder.Services.AddScoped<IServiceRepository, ServiceRepository>();
 builder.Services.AddScoped<IAttachmentRepository, AttachmentRepository>();
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
-builder.Services.AddScoped<IEmailService, EmailService>();
 
 builder.Services.AddLogging();
 

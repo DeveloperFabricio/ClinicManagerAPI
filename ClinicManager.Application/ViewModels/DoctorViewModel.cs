@@ -8,20 +8,6 @@ namespace ClinicManager.Application.ViewModels
 {
     public class DoctorViewModel
     {
-        public DoctorViewModel(int id, 
-            string name, 
-            string surname, 
-            string specialty, 
-            string registrationCRM)
-
-        {
-            Id = id;
-            Name = name;
-            Surname = surname;
-            Specialty = specialty;
-            RegistrationCRM = registrationCRM;
-        }
-
         public int Id { get; set; }
         public string Name { get; set; }
         public string Surname { get; set; }

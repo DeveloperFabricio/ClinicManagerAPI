@@ -8,22 +8,6 @@ namespace ClinicManager.Application.ViewModels
 {
     public class PatientViewModel
     {
-        public PatientViewModel(int id, 
-            string name, 
-            string surname, 
-            string phoneNumber, 
-            string email, 
-            string cpf)
-
-        {
-            Id = id;
-            Name = name;
-            Surname = surname;
-            PhoneNumber = phoneNumber;
-            Email = email;
-            Cpf = cpf;
-        }
-
         public int Id { get; set; }
         public string Name { get; set; }
         public string Surname { get; set; }

@@ -9,30 +9,6 @@ namespace ClinicManager.Application.Commands.CreatePatientCommand
 {
     public class CreatePatientCommand : IRequest<Unit>
     {
-        public CreatePatientCommand(string name, 
-            string surname, 
-            DateTime dateOfBirth, 
-            string phoneNumber, 
-            string email, 
-            string cpf, 
-            string bloodType, 
-            double height, 
-            double weight, 
-            string address)
-
-        {
-            Name = name;
-            Surname = surname;
-            DateOfBirth = dateOfBirth;
-            PhoneNumber = phoneNumber;
-            Email = email;
-            Cpf = cpf;
-            BloodType = bloodType;
-            Height = height;
-            Weight = weight;
-            Address = address;
-        }
-
         public string Name { get; set; }
         public string Surname { get; set; }
         public DateTime DateOfBirth { get; set; }

@@ -10,24 +10,6 @@ namespace ClinicManager.Application.Commands.CreateServiceClinicCommand
 {
     public class CreateServiceClinicCommand : IRequest<Unit>
     {
-        public CreateServiceClinicCommand(int idPatient, 
-            int idService, 
-            int idDoctor, 
-            string healthInsurance, 
-            DateTime start, 
-            DateTime end, 
-            TypeServiceEnum typeServices)
-
-        {
-            IdPatient = idPatient;
-            IdService = idService;
-            IdDoctor = idDoctor;
-            HealthInsurance = healthInsurance;
-            Start = start;
-            End = end;
-            TypeServices = typeServices;
-        }
-
         public int IdPatient { get; set; }
         public int IdService { get; set; }
         public int IdDoctor { get; set; }

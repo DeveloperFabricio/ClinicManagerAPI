@@ -1,13 +1,11 @@
 ﻿using ClinicManager.Application.Commands.CreateServiceClinicCommand;
 using ClinicManager.Application.Queries.GetIdPatient;
 using ClinicManager.Application.Queries.GetIdService;
-using ClinicManager.Infrastructure.Persistence;
 using ClinicManagerAPI.Entities;
 using ClinicManagerAPI.Repositories.Interface;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
 
 namespace ClinicManagerAPI.Controllers
 {
@@ -18,14 +16,12 @@ namespace ClinicManagerAPI.Controllers
     {
         private readonly IServiceClinicRepository _serviceClinicRepository;
         private readonly IMediator _mediator;
-       
 
         public ServiceClinicController(IServiceClinicRepository serviceClinicRepository, IMediator mediator)
 
         {
             _serviceClinicRepository = serviceClinicRepository;
             _mediator = mediator;
-            
         }
 
         [HttpGet]
@@ -63,7 +59,7 @@ namespace ClinicManagerAPI.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> AddServiceClinicCommand([FromBody] CreateServiceClinicCommand command)
+        public async Task<IActionResult> AddServiceClinicCommand(CreateServiceClinicCommand command)
         {
             try
             {
@@ -81,7 +77,6 @@ namespace ClinicManagerAPI.Controllers
                 }
             
         }
-
         [HttpPut("{id}")]
         public async Task<IActionResult> UpdateServiceClinicAsync(int id, ServiceClinic serviceClinic)
         {
