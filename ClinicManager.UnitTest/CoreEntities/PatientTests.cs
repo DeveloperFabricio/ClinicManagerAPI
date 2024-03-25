@@ -25,11 +25,19 @@ namespace ClinicManager.UnitTest.CoreEntities
                 Height = 175,
                 Weight = 70,
                 Address = "123 Main St"
+
             };
+
 
             var result = patient.IsValid();
 
             Assert.True(result);
         }
     }
-}
+
+}                
+                
+            
+
+
+

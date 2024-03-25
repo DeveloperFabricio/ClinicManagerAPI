@@ -14,7 +14,8 @@ namespace ClinicManager.Application.Commands.CreateServiceCommand
             _appDbContext = appDbContext;
             _unitOfWork = unitOfWork;
         }
-            public async Task<Unit> Handle(CreateServiceCommand request, CancellationToken cancellationToken)
+            
+        public async Task<Unit> Handle(CreateServiceCommand request, CancellationToken cancellationToken)
         {
             var service = new Service
             {

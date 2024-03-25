@@ -8,6 +8,8 @@ namespace ClinicManagerAPI.Entities
 {
     public class ServiceClinic
     {
+       
+
         public int Id { get; set; }
         public Patient IdPatient { get; set; }
         public Service IdService { get; set; }
@@ -16,45 +18,6 @@ namespace ClinicManagerAPI.Entities
         public DateTime Start { get; set; }
         public DateTime End { get; set; }
         public TypeServiceEnum TypeServices { get; set; }
-
-        public void SendConfirmationEmail(string email, string subject, string body)
-        {
-            var smtpClient = new SmtpClient("smtp.example.com")
-            {
-                Port = 587,
-                Credentials = new NetworkCredential("username", "password"),
-                EnableSsl = true,
-            };
-
-            var mailMessage = new MailMessage
-            {
-                From = new MailAddress("from@example.com"),
-                Subject = subject,
-                Body = body,
-                IsBodyHtml = true,
-            };
-
-            mailMessage.To.Add(email);
-
-            smtpClient.Send(mailMessage);
-        }
-
-        public void SendConfirmationSMS(string phoneNumber, string message)
-        {
-            
-            const string accountSid = "SUA_ACCOUNT_SID";
-            const string authToken = "SEU_AUTH_TOKEN";
-            TwilioClient.Init(accountSid, authToken);
-
-            
-            var twilioMessage = MessageResource.Create(
-                body: message,
-                from: new Twilio.Types.PhoneNumber("SEU_NUMERO_TWILIO"),
-                to: new Twilio.Types.PhoneNumber(phoneNumber)
-            );
-
-            Console.WriteLine(twilioMessage.Sid); 
-        }
 
         public bool IsValid()
         {
