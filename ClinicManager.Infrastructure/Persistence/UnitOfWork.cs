@@ -21,9 +21,5 @@ namespace ClinicManager.Infrastructure.Persistence
             return await _appDbContext.SaveChangesAsync();
         }
 
-        public async Task<int> DeleteAsync()
-        {
-            return await _appDbContext.SaveChangesAsync();
-        }
     }
 }

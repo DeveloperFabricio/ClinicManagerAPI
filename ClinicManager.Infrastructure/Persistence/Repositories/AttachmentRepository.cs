@@ -47,7 +47,6 @@ namespace ClinicManager.Infrastructure.Persistence.Repositories
                     throw new ArgumentException($"Não foi possível encontrar os anexos com o ID {attachment.Id}");
                 }
 
-                // Atualizar apenas as propriedades modificadas
                 _appDbContext.Entry(existingAttachment).CurrentValues.SetValues(attachment);
 
                 await _appDbContext.SaveChangesAsync();

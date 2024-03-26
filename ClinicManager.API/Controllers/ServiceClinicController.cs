@@ -1,6 +1,8 @@
 ﻿using ClinicManager.Application.Commands.CreateServiceClinicCommand;
+using ClinicManager.Application.Queries.GetIdDoctor;
 using ClinicManager.Application.Queries.GetIdPatient;
 using ClinicManager.Application.Queries.GetIdService;
+using ClinicManager.Application.Queries.GetIdServiceClinic;
 using ClinicManagerAPI.Entities;
 using ClinicManagerAPI.Repositories.Interface;
 using MediatR;
@@ -41,17 +43,22 @@ namespace ClinicManagerAPI.Controllers
         [HttpGet("{id}")]
         public async Task<IActionResult> GetServiceClinicByIdQuery(int id)
         {
-            var query = new GetServiceByIdQuery(id);
+            var query = new GetServiceClinicByIdQuery(id);
             try
             {
                 var serviceClinic = await _mediator.Send(query);
+
                 if (serviceClinic == null)
                 {
                     return NotFound();
                 }
+
                 return Ok(serviceClinic);
+
             }
+
             catch (Exception)
+
             {
                 return StatusCode(500, $"Não existe serviço clinico cadastrado!");
             }
@@ -63,20 +70,22 @@ namespace ClinicManagerAPI.Controllers
         {
             try
             {
-                    if (command == null)
-                    {
-                        return BadRequest("O serviço clinico está vazio!");
-                    }
+                if (command == null)
+                {
+                    return BadRequest("Os dados fornecidos estão vazios!");
+                }
 
                 var id = await _mediator.Send(command);
                 return CreatedAtAction(nameof(GetServiceClinicByIdQuery), new { id = id }, command);
             }
-                catch (Exception)
-                {
-                    return StatusCode(500, $"Erro ao criar o serviço clinico!");
-                }
-            
+
+            catch (Exception)
+            {
+                return StatusCode(500, $"Não foi possível adicionar o Serviço Clinico!");
+            }
+
         }
+
         [HttpPut("{id}")]
         public async Task<IActionResult> UpdateServiceClinicAsync(int id, ServiceClinic serviceClinic)
         {

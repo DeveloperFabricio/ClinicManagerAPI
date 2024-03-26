@@ -40,6 +40,7 @@ namespace ClinicManager.Infrastructure.Persistence.Repositories
         public async Task<Patient> GetPatientByIdAsync(int id)
         {
             return await _appDbContext.Patients.FirstOrDefaultAsync(x => x.Id == id);
+
         }
 
         public async Task<Patient> GetPatientByPhoneNumberAsync(string phoneNumber)
@@ -57,7 +58,6 @@ namespace ClinicManager.Infrastructure.Persistence.Repositories
                     throw new ArgumentException($"Não foi possível encontrar o paciente com o ID {patient.Id}");
                 }
 
-                // Atualizar apenas as propriedades modificadas
                 _appDbContext.Entry(existingPatient).CurrentValues.SetValues(patient);
 
                 await _appDbContext.SaveChangesAsync();

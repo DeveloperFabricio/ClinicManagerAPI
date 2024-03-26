@@ -1,6 +1,7 @@
 ﻿using ClinicManagerAPI.Entities;
 using ClinicManagerAPI.Repositories.Interface;
 using Microsoft.EntityFrameworkCore;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 
 namespace ClinicManager.Infrastructure.Persistence.Repositories
 {
@@ -40,7 +41,6 @@ namespace ClinicManager.Infrastructure.Persistence.Repositories
                     throw new ArgumentException($"Não foi possível encontrar o médico com o ID {doctor.Id}");
                 }
 
-                // Atualizar apenas as propriedades modificadas
                 _context.Entry(existingDoctor).CurrentValues.SetValues(doctor);
 
                 await _context.SaveChangesAsync();

@@ -17,28 +17,7 @@ namespace ClinicManagerAPI.Entities
         public DateTime End { get; set; }
         public TypeServiceEnum TypeServices { get; set; }
 
-        public void SendConfirmationEmail(string email, string subject, string body)
-        {
-            var smtpClient = new SmtpClient("smtp.example.com")
-            {
-                Port = 587,
-                Credentials = new NetworkCredential("username", "password"),
-                EnableSsl = true,
-            };
-
-            var mailMessage = new MailMessage
-            {
-                From = new MailAddress("from@example.com"),
-                Subject = subject,
-                Body = body,
-                IsBodyHtml = true,
-            };
-
-            mailMessage.To.Add(email);
-
-            smtpClient.Send(mailMessage);
-        }
-
+        
         public void SendConfirmationSMS(string phoneNumber, string message)
         {
             

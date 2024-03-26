@@ -82,6 +82,7 @@ builder.Services.AddAuthentication(options =>
 builder.Services.AddDbContext<AppDbContext>(options =>
 options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
+
 builder.Services.AddMediatR(op => op.RegisterServicesFromAssemblyContaining(typeof(CreateDoctorCommand)));
 builder.Services.AddMediatR(op => op.RegisterServicesFromAssemblyContaining(typeof(CreatePatientCommand)));
 builder.Services.AddMediatR(op => op.RegisterServicesFromAssemblyContaining(typeof(CreateServiceClinicCommand)));
