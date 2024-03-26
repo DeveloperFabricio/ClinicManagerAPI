@@ -1,6 +1,6 @@
 ## Clinic Manager API 🌐
 
-## ⚙️ Status: Em Progresso...
+## ⚙️ Status: Completo e Funcionando.
 
 #### Este projeto é uma API web que implementa um sistema de gerenciamento de um clinica.
 #### A API permite que a clinica tenha controle total de: Médicos, Pacientes, Atendimento.
@@ -8,15 +8,15 @@
 #### Paciente pode ser encontrado pelo CPF e Celular, e ainda recebe uma confirmação de agendamento por e-mail e Google Agenda.
 
 
-### Funcionalidades 🖥️  ☑ (Concluído) ⌛ (Implementando)
+### Funcionalidades 🖥️  ☑ (Concluído)
 
 
 - ☑ CRUD Paciente Busca Por CPF (e celular)
 - ☑ CRUD Médico
 - ☑ CRUD Atendimento
 - ☑ CRUD Serviço
-- ⌛ PLUS 2: Confirmação de Agendamento (Email/SMS + Google Agenda).
-- ⌛ PLUS 2: Background Service rodando e notificando no dia anterior.
+- ☑ PLUS 2: Confirmação de Agendamento (Email/SMS + Google Agenda).
+- ☑ PLUS 2: Background Service rodando e notificando no dia anterior.
 - ☑ PLUS 2: Autenticação e Autorização Perfis: Médico, Administrador, Receptionista.
 - ☑ PLUS 2: CRUD DE ANEXO Tipos: Atestado, Receita, Evolução.
   
@@ -40,7 +40,7 @@
 - ☑ IEntityTipeConfiguration 
 - ☑ Sql Server 
 - ☑ Unit Of Work
-- ⌛ HostedService
+- ☑ HostedService
 - ☑ Domain Event
 - ☑ CQRS
 - ☑ Teste Unitários
